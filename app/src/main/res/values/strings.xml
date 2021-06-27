@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Bus Booking App UI</string>
+    <string name="app_name">Bus Booking App </string>
+    <string-array name="destination_item">
+        <item>Jakarta</item>
+        <item>Bandung</item>
+    </string-array>
 </resources>
