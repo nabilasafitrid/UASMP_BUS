@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:background="#523c60"
             app:theme="@style/AppTheme.Toolbar">
 
             <RelativeLayout
@@ -53,7 +54,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bus_image_1" />
+                        android:background="#523c60"
+                        android:src="@drawable/logo" />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -167,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="16dp"
-                    android:background="@drawable/buttonshape"
+                    android:background="#523c60"
                     android:fontFamily="@font/calibri"
                     android:text="REGISTER"
                     android:textAllCaps="false"

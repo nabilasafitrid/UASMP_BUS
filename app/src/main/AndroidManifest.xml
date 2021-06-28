@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Invoice"
-            android:exported="true"></activity>
-        <activity
             android:name=".Register"
             android:configChanges="orientation|screenSize"
             android:label=""
@@ -41,6 +38,13 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".Main3Activity"
+            android:configChanges="orientation|screenSize"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".Invoice"
             android:configChanges="orientation|screenSize"
             android:label=""
             android:screenOrientation="portrait"
