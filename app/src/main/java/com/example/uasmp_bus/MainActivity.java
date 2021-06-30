@@ -23,7 +23,9 @@ import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private String nama;
+    public static final String EXTRA_MESSAGES =
+            "com.example.android.uts.extra.MESSAGES";
     Button search_buses;
     DatePickerDialog picker;
     EditText eText;
@@ -37,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        TextView name_ed = (TextView) findViewById(R.id.nameView);
+        if (getIntent().getExtras() != null){
+            Bundle bundle = getIntent().getExtras();
+            name_ed.setText(bundle.getString("NAMA"));
+        }else{
+            name_ed.setText( getIntent().getStringExtra("NAMA"));
+
+        }
+
         search_buses = findViewById(R.id.search_buses);
         search_buses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         autoCompleteTextView.setAdapter(adapterarray);
 
         autoCompleteTextView =  findViewById(R.id.destination_item);
-        String[] options = new String[] {"Jakarta", "Bandung"};
+        String[] options = new String[] {"Bandung", "Jakarta"};
         ArrayAdapter adapterarrays = new ArrayAdapter(this, R.layout.dropdown_menu_popup_item, options);
         autoCompleteTextView.setText(adapterarray.getItem(0).toString(), false);
         autoCompleteTextView.setAdapter(adapterarrays);
