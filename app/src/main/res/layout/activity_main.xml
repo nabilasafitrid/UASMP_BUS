@@ -164,6 +164,14 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:visibility="invisible"
+                        tools:visibility="invisible" />
+
                 </androidx.cardview.widget.CardView>
 
                 <Button

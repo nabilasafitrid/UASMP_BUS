@@ -19,7 +19,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
     EditText eText;
     Button btnGet;
     TextView tvw;
+    TextView tgl;
     AutoCompleteTextView autoCompleteTextView;
+    AutoCompleteTextView autoCompleteTextView1;
+    public String KEY_DESTI ="DESTINATION";
+    public String KEY_FROM ="FROM";
+    public String KEY_DATE ="DATE";
     @RequiresApi(api= Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        search_buses = findViewById(R.id.search_buses);
-        search_buses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
-                startActivity(intent);
-            }
-        });
 
         autoCompleteTextView =  findViewById(R.id.from_item);
         String[] option = new String[] {"Jakarta", "Bandung"};
@@ -64,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
         autoCompleteTextView.setText(adapterarray.getItem(0).toString(), false);
         autoCompleteTextView.setAdapter(adapterarray);
 
-        autoCompleteTextView =  findViewById(R.id.destination_item);
+        autoCompleteTextView1 =  findViewById(R.id.destination_item);
         String[] options = new String[] {"Bandung", "Jakarta"};
         ArrayAdapter adapterarrays = new ArrayAdapter(this, R.layout.dropdown_menu_popup_item, options);
-        autoCompleteTextView.setText(adapterarray.getItem(0).toString(), false);
-        autoCompleteTextView.setAdapter(adapterarrays);
+        autoCompleteTextView1.setText(adapterarrays.getItem(0).toString(), false);
+        autoCompleteTextView1.setAdapter(adapterarrays);
 
+        tgl=(TextView)findViewById(R.id.date);
         tvw=(TextView)findViewById(R.id.date_textv);
         eText=(EditText) findViewById(R.id.date_edit);
         eText.setInputType(InputType.TYPE_NULL);
@@ -77,18 +77,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
+                int dayw = cldr.get(Calendar.DAY_OF_WEEK);
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
+
                 picker = new DatePickerDialog(MainActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            public void onDateSet(DatePicker view,int year, int monthOfYear, int dayOfMonth) {
                                 eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+                                Date date = new Date(year, monthOfYear, dayOfMonth-1);
+                                String dayOfWeek = simpledateformat.format(date);
+                                SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+                                String month_name = month_date.format(cldr.getTime());
+                                tgl.setText(dayOfMonth + " - " + month_name + " - " + year + "   | " + dayOfWeek );
                             }
                         }, year, month, day);
                 picker.show();
+            }
+        });
+        search_buses = findViewById(R.id.search_buses);
+        search_buses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                Intent intent1 = new Intent(getApplicationContext(), Main3Activity.class);
+                intent.putExtra("DESTINATION", autoCompleteTextView1.getText().toString());
+                intent.putExtra("FROM", autoCompleteTextView.getText().toString());
+                intent.putExtra("DATE", tgl.getText().toString());
+                intent.putExtra("NAMA", name_ed.getText().toString());
+//                intent1.putExtra("DESTINATION", autoCompleteTextView1.getText().toString());
+//                intent1.putExtra("FROM", autoCompleteTextView.getText().toString());
+//                intent1.putExtra("DATE", tgl.getText().toString());
+//                intent1.putExtra("NAMA", name_ed.getText().toString());
+                startActivity(intent);
             }
         });
 //        btnGet=(Button)findViewById(R.id.register);
