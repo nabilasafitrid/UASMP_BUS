@@ -60,6 +60,7 @@ public class ticket extends AppCompatActivity {
         TextView date_dt2 = (TextView) findViewById(R.id.date3view);
         TextView waktuber = (TextView) findViewById(R.id.waktu_bisber4);
         TextView waktuti = (TextView) findViewById(R.id.waktu_bisti4);
+
         if (getIntent().getExtras() != null){
             Bundle bundle = getIntent().getExtras();
             name_dt1.setText(bundle.getString("NAMA"));
@@ -69,6 +70,8 @@ public class ticket extends AppCompatActivity {
             date_dt2.setText(bundle.getString("DATE"));
             waktuber.setText(bundle.getString("WAKTUBER"));
             waktuti.setText(bundle.getString("WAKTUTI"));
+            fromcaps.setText(bundle.getString("FROM"));
+            descaps.setText(bundle.getString("DESTINATION"));
         }else{
             name_dt1.setText( getIntent().getStringExtra("NAMA"));
             des_dt1.setText( getIntent().getStringExtra("DESTINATION"));
@@ -77,6 +80,8 @@ public class ticket extends AppCompatActivity {
             date_dt2.setText( getIntent().getStringExtra("DATE"));
             waktuber.setText( getIntent().getStringExtra("WAKTUBER"));
             waktuti.setText( getIntent().getStringExtra("WAKTUTI"));
+            fromcaps.setText(getIntent().getStringExtra("FROM"));
+            descaps.setText(getIntent().getStringExtra("DESTINATION"));
         }
 
 
